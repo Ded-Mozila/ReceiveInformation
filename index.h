@@ -1,22 +1,27 @@
-pragma one;
-#include "header.h"
+#ifndef INDEX_H
+#define INDEX_H value
 
-struct DataAll
+#include "header.h"
+namespace data_lvl
 {
-	float Gg; // Стандартный градиент температуры
-	float alpha // фактор снижения температуры
-	float Rd; //Газовая постоянная для сухого воздуха
+	float SurfaceGeopotential(float z,float g); // Значение геопотенциала
+	float TempReductionFactor(float Gg, float Rd, float g); // Фактор снижения температуры
+	float Gg(6.5/1000); // Стандартный градиент температуры
+	float Rd(287.04); //Газовая постоянная для сухого воздуха
 	//float Theta; // потенциальная температура
-	float g;
-	float Fs; // Поверхность геопотенциалла
+	float g(9.80665);
+	float alpha(TempReductionFactor(Gg,Rd,g)); // фактор снижения температур
+	/** Для кадой точки свой)
+	*float Fs; // Поверхность геопотенциалла
+*/
 	
-}
+};
 
 class DataImage
 {
 	vector<vector< float > > ps;	// давление на уровне земли
 	vector<vector< float > > ts;	
-}
+};
 class Grid
 {
 	vector<vector< float > > hgt;
@@ -25,4 +30,5 @@ class Grid
 public:
 	Grid(){};
 	~Grid(){};
-}
+};
+#endif
