@@ -1,13 +1,4 @@
-#pragma one
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <sys/types.h>
-#include <dirent.h>
-#include <errno.h>
-using namespace std;
+#include "header.h"
 
 class File
 {
@@ -24,22 +15,23 @@ public:
 	//void setSignFile(fstream& SFile){open_file =SFile}; // Замена указателя на файл
 	fstream* getSingnFile(void); // Получение указателя на файл
 	string getNameFile(void);
+	void openFile();
 };
 
 class GidroFile:  public File
 {
 private:
+	string name;
 	int column;
 	int row;
 	float maxElement;
 	float minElement;
-	vector<vector<int> > matrixMap;
+	vector<vector<float> > matrixMap;
+	void FindData();
 public:
-	GidroFile();
+	GidroFile(){};
 	GidroFile(string);
-//	void 
-
-
+	~GidroFile(){};
 };
 class ListDir
 {
@@ -53,5 +45,4 @@ public:
 	//void printElementList(string nameFile); непонятно почему не работает!
 	void printDirList(void);
 	int getdir(void);
-
 };
