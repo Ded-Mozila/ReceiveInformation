@@ -31,6 +31,7 @@ private:
 public:
 	GidroFile(){};
 	GidroFile(string);
+	void OpenFile(string);
 	~GidroFile(){};
 };
 class ListDir
