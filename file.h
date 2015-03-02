@@ -1,4 +1,6 @@
 #include "header.h"
+#ifndef FILE_H
+#define FILE_H
 
 class File
 {
@@ -47,3 +49,6 @@ public:
 	void printDirList(void);
 	int getdir(void);
 };
+
+
+#endif

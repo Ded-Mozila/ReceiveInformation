@@ -1,4 +1,4 @@
-#pragma one
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,3 +10,5 @@
 
 #include <stdio.h> // freeopen()
 using namespace std;
+
+

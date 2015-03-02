@@ -3,11 +3,16 @@
 GidroFile::GidroFile(string str): name(str)
 {
 	// open_file.open(str.c_str());
-	FindData();
+	OpenFile(str);
 }
 void GidroFile::FindData()
 {
-	freopen(name.c_str(),"r",stdin);
+	
+}
+
+void GidroFile::OpenFile(string str)
+{
+	freopen(str.c_str(),"r",stdin);
 	string index;
 	cin >> index;
 	cin >> row >> column;
