@@ -1,5 +1,14 @@
 #include "file.h"
 
+
+string GenNameFile(const string dir,string fileName) // -> header.h
+{
+	stringstream ss;
+	ss << dir << fileName;
+	string str;
+	ss >> str;
+	return str;
+};
 // File::File(){};
 // File::~File(){};
 File::File(string Name):name(Name)
@@ -46,4 +55,9 @@ void printElementList(string nameFile)
 void ListDir::printDirList(void)
 {
 	for_each(listNameFile.begin(), listNameFile.end(), printElementList);
+}
+
+VVfloat GidroFile::setVector()
+{
+	return matrixMap;
 }

@@ -1,16 +1,17 @@
 #include "index.h"
-//////////////////////Namespace Data_LVL /////////////////////////
-
-
-
-//////////////////////Class Grid /////////////////////////////////
-
-// Grid::Grid(string FN_hgt, string FN_lat, string FN_lon)
-// {
-// 	// hgt.OpenFile(FN_hgt);
-// 	// lat.OpenFile(FN_lat);
-// 	// lon.OpenFile(FN_lon);
-// }
-
+#include <cmath>
+//#include "namespaceData.h"
 ////////////////////Class DataImage //////////////////////////////
-
+DataImage::DataImage(const string strDir, int& H):hour(H)
+{
+	ps.OpenFile(GenNameFile(strDir,genName(H,"ps")));
+	ts.OpenFile(GenNameFile(strDir,genName(H,"ts")));
+}
+string DataImage::genName(int& h,const string str)
+{
+	stringstream ss;
+	ss << str << '_'<< setfill ('0') << setw (3) << h << ".grd";
+	string fileName;
+	ss >> fileName;
+	return fileName;
+}

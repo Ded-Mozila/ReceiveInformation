@@ -1,8 +1,7 @@
 #ifndef NAMESPACEDATA_H
 #define NAMESPACEDATA_H 
-
-//#include "settings.h"
 #include "header.h"
+#include "file.h"
 namespace Data_Lvl
 {
 
@@ -12,15 +11,27 @@ namespace Data_Lvl
 	float Rd(287.04); //Газовая постоянная для сухого воздуха
 	float SurfaceGeopotential(float); // Значение геопотенциала
 	float TempReductionFactor(); // Фактор снижения температуры
-	vector<vector<float> > TableGeopotential(vector<vector<float> >); //Создание таблицы геопотенциала
+	VVfloat TableGeopotential(VVfloat); //Создание таблицы геопотенциала
 	float TempSurface(float,float,float);	//T* Нахождение температуры на уровне
 
 	float alpha(Gg*Rd/g); // фактор снижения температур
+	//string GenNameFile(const string,string);
 
 	GidroFile hgt;		//Высота
 	GidroFile lat;		//Широта
 	GidroFile lon;		//Долгота
+	VVfloat geopotential;
 };
+
+// string Data_Lvl::GenNameFile(const string dir,string fileName)
+// {
+// 	stringstream ss;
+// 	ss << dir << fileName;
+// 	string str;
+// 	ss >> str;
+// 	return str;
+// };
+
 float Data_Lvl::SurfaceGeopotential(float z)
 {
  	return (g*z );
@@ -32,10 +43,10 @@ float Data_Lvl::TempReductionFactor()
 float Data_Lvl::TempSurface(float Tnlev,float Ps,float Pnlev)
 {
 	return (Tnlev + (alpha * Tnlev)*( (Ps/Pnlev) -1 ));
-}
-vector<vector<float> > Data_Lvl::TableGeopotential(vector<vector<float> > ZMap)
+};
+VVfloat Data_Lvl::TableGeopotential(VVfloat ZMap)
 {
-	vector<vector<float> > Fs_p;
+	VVfloat Fs_p;
 	vector<float> fs_p;
 	int N = ZMap.size();
 	int n = ZMap[0].size();// Возможна ошибка в размерноти массива
@@ -48,6 +59,6 @@ vector<vector<float> > Data_Lvl::TableGeopotential(vector<vector<float> > ZMap)
 		Fs_p.push_back(fs_p);
 		fs_p.clear();
 	}
-	return Fs_p
-}
+	return Fs_p;
+};
 #endif

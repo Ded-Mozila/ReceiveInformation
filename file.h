@@ -1,7 +1,6 @@
 #include "header.h"
 #ifndef FILE_H
 #define FILE_H
-
 class File
 {
 private:
@@ -28,12 +27,13 @@ private:
 	int row;
 	float maxElement;
 	float minElement;
-	vector<vector<float> > matrixMap;
+	VVfloat matrixMap;
 	void FindData();
 public:
 	GidroFile(){};
 	GidroFile(string);
 	void OpenFile(string);
+	VVfloat setVector();
 	~GidroFile(){};
 };
 class ListDir

@@ -1,21 +1,15 @@
 #include "settings.h"
-#include <sstream>
-string Settings::GenNameFile(const string dir,string fileName)
-{
-	stringstream ss;
-	ss << dir << fileName;
-	string str;
-	ss >> str;
-	return str;
-}
+#include "namespaceData.h"
 Settings::Settings(string name): nameFileSettings(name)
 {
 	freopen(name.c_str(),"r",stdin);
 	string DirName;
+	using namespace Data_Lvl;
 	cin >> DirName;//  Директория где расположены файлы
-	// data_lvl::hgt.OpenFile(GenNameFile(DirName,"hgt.grd"));
-	// data_lvl::lat.OpenFile(GenNameFile(DirName,"lat.grd"));
-	// data_lvl::lon.OpenFile(GenNameFile(DirName,"lon.grd"));
+	hgt.OpenFile(GenNameFile(DirName,"hgt.grd"));
+	lat.OpenFile(GenNameFile(DirName,"lat.grd"));
+	lon.OpenFile(GenNameFile(DirName,"lon.grd"));
+	geopotential = TableGeopotential(hgt.setVector()); // Получение данных о геопотенциале
 	fclose(stdin);
 }
 
