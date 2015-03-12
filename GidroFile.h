@@ -13,9 +13,9 @@ public:
 	DataImage(){};
 	~DataImage(){};
 	DataImage(const string,int&); //Получение данных из файла с указанным именем
-	GidroFile GetPs();
-	GidroFile GetTs();
-	int GetHour();
+	GidroFile GetPs(void);
+	GidroFile GetTs(void);
+	int GetHour(void);
 	string genName(int&,const string);
 	void Open(const string,int);
 	DataImage& operator = (const DataImage&);

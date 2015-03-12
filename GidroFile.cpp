@@ -31,33 +31,34 @@ void GidroFile::OpenFile(string str)
 	}
 	fclose(stdin);
 }
-GidroFile& GidroFile::operator = (const GidroFile& other)
-{
-	this->name = other.setName();
-	this->column = other.setColumn();
-	this->row = other.setRow();
-	this->matrixMap = other.setVector();
-	this->maxElement = other.setMaxElement();
-	this->minElement= other.setMinElement();
-	return *this;
-}
-string GidroFile::setNameFile()
+string GidroFile::setName(void)
 {
 	return name;
 }
-int GidroFile::setRow()
+int GidroFile::setRow(void)
 {
 	return row;
 }
-int GidroFile::setColumn()
+int GidroFile::setColumn(void)
 {
 	return column;
 }
-float GidroFile::setMaxElement()
+float GidroFile::setMaxElement(void)
 {
 	return maxElement;
 }
-float GidroFile::setMinElement()
+float GidroFile::setMinElement(void)
 {
 	return minElement;
+}
+
+GidroFile& GidroFile::operator= (const GidroFile& other)
+{
+	name = other.name;
+	column = other.column;
+	row = other.row;
+	matrixMap = other.matrixMap;
+	maxElement = other.maxElement;
+	minElement = other.minElement;
+	return *this;
 }

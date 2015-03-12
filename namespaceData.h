@@ -7,30 +7,19 @@ namespace Data_Lvl
 
 	float g(9.80665);
 	//vector<vector<float> > TableGeopotential(vector<vector<float> > ZMap); //Создание таблицы геопотенциала
-	float Gg(6.5/1000); // Стандартный градиент температуры
-	float Rd(287.04); //Газовая постоянная для сухого воздуха
-	float SurfaceGeopotential(float); // Значение геопотенциала
-	float TempReductionFactor(); // Фактор снижения температуры
-	VVfloat TableGeopotential(VVfloat); //Создание таблицы геопотенциала
-	float TempSurface(float,float,float);	//T* Нахождение температуры на уровне
+	float Gg(6.5/1000); 					// Стандартный градиент температуры
+	float Rd(287.04);						// Газовая постоянная для сухого воздуха
+	float SurfaceGeopotential(float); 		// Значение геопотенциала
+	float TempReductionFactor(); 			// Фактор снижения температуры
+	VVfloat TableGeopotential(VVfloat); 	// Создание таблицы геопотенциала
+	float TempSurface(float,float,float);	// T* Нахождение температуры на уровне
 
-	float alpha(Gg*Rd/g); // фактор снижения температур
-	//string GenNameFile(const string,string);
-
-	GidroFile hgt;		//Высота
-	GidroFile lat;		//Широта
-	GidroFile lon;		//Долгота
-	VVfloat geopotential;
+	float alpha(Gg*Rd/g); 	// фактор снижения температур
+	GidroFile hgt;			//Высота
+	GidroFile lat;			//Широта
+	GidroFile lon;			//Долгота
+	VVfloat geopotential;	//Геопотенциал
 };
-
-// string Data_Lvl::GenNameFile(const string dir,string fileName)
-// {
-// 	stringstream ss;
-// 	ss << dir << fileName;
-// 	string str;
-// 	ss >> str;
-// 	return str;
-// };
 
 float Data_Lvl::SurfaceGeopotential(float z)
 {

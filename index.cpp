@@ -21,15 +21,15 @@ string DataImage::genName(int& h,const string str)
 }
 DataImage& DataImage::operator= (const DataImage& other)
 {
-	this->ps = other.GetPs();
-	this->ts = other.GetTs();
-	this->hour = other.GetHour();
+	ps = other.ps;
+	ts = other.ts;
+	hour = other.hour;
 	return *this;
 
 }
 int DataImage::GetHour()
 {
-	return hour:
+	return hour;
 }
 GidroFile DataImage::GetTs()
 {

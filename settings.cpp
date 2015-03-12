@@ -1,6 +1,6 @@
 #include "settings.h"
 #include "namespaceData.h"
-Settings::Settings(string name): nameFileSettings(name)
+Settings::Settings(string name): FileSettings(name)
 {
 	freopen(name.c_str(),"r",stdin);
 	string DirName;
@@ -16,8 +16,8 @@ int Settings::getN()
 {
 	return n;
 }
-string Settings::getNameFile()
+string Settings::getName()
 {
-	return nameFileSettings;
+	return FileSettings;
 }
 

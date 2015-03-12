@@ -21,7 +21,7 @@ public:
 };
 
 // Класс для работы с конкретным файлом для его обработки и хранения информации из него
-class GidroFile:  public File
+class GidroFile
 {
 private:
 	string name;		// Имя файла	
@@ -34,13 +34,13 @@ public:
 	GidroFile(){};			// Конструктор по умолчанию
 	GidroFile(string);		// Конструктор который принимает строку имени файла	
 	void OpenFile(string);	// Открыйтие и считываение файловых данных	
-	VVfloat setVector();	// Возвращает значение 
-	string setName();		// Возвращает имя файла
-	int setColumn();		// Возвращает длину столбца матрицы
-	int setRow();			// Возвращает длину строки матрицы
-	float setMaxElemant();	// Возвращает максимальный элемент из матрицы
-	float setMinElemant();	// Возвращает минимальный элемент из матрицы
-	GidroFile& operator= (const GidroFile&); //Оператор присваивания
+	VVfloat setVector(void);	// Возвращает значение 
+	string setName(void);		// Возвращает имя файла
+	int setColumn(void);		// Возвращает длину столбца матрицы
+	int setRow(void);			// Возвращает длину строки матрицы
+	float setMaxElement(void);	// Возвращает максимальный элемент из матрицы
+	float setMinElement(void);	// Возвращает минимальный элемент из матрицы
+	GidroFile & operator= (const GidroFile&); //Оператор присваивания
 
 	~GidroFile(){};			// Деструктор по умолчанию
 };

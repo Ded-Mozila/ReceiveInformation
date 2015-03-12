@@ -5,7 +5,7 @@
 class Settings
 {
 private:
-	string nameFileSettings;
+	string FileSettings;
 	vector<string> listNameFile;
 	int n; // Количество временных отрезков
 public:
@@ -13,6 +13,6 @@ public:
 	~Settings(){};
 	Settings(string);
 	int getN();
-	string getNameFile();
+	string getName();
 };
 #endif
