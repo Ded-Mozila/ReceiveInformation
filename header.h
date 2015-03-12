@@ -6,6 +6,7 @@
 #include <string> 
 #include <sstream> 
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <sys/types.h>
 #include <dirent.h>

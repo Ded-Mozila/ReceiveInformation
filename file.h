@@ -1,6 +1,7 @@
 #include "header.h"
 #ifndef FILE_H
 #define FILE_H
+// Базовый класс для работы с фалами
 class File
 {
 private:
@@ -19,36 +20,46 @@ public:
 	void openFile();
 };
 
+// Класс для работы с конкретным файлом для его обработки и хранения информации из него
 class GidroFile:  public File
 {
 private:
-	string name;
-	int column;
-	int row;
-	float maxElement;
-	float minElement;
-	VVfloat matrixMap;
-	void FindData();
+	string name;		// Имя файла	
+	int column;			// Количество столбцов в матрицы	
+	int row; 			// Количество строк в матрицы
+	float maxElement;	// Максимальное занечение в матрицы
+	float minElement;	// Минимальное значени е в файле
+	VVfloat matrixMap;	// Матрица(сетка) значений относительно карты
 public:
-	GidroFile(){};
-	GidroFile(string);
-	void OpenFile(string);
-	VVfloat setVector();
-	~GidroFile(){};
+	GidroFile(){};			// Конструктор по умолчанию
+	GidroFile(string);		// Конструктор который принимает строку имени файла	
+	void OpenFile(string);	// Открыйтие и считываение файловых данных	
+	VVfloat setVector();	// Возвращает значение 
+	string setName();		// Возвращает имя файла
+	int setColumn();		// Возвращает длину столбца матрицы
+	int setRow();			// Возвращает длину строки матрицы
+	float setMaxElemant();	// Возвращает максимальный элемент из матрицы
+	float setMinElemant();	// Возвращает минимальный элемент из матрицы
+	GidroFile& operator= (const GidroFile&); //Оператор присваивания
+
+	~GidroFile(){};			// Деструктор по умолчанию
 };
+
+// Класс для работы со списоком файлов, которые расположеный в директории
+
 class ListDir
 {
 private:
-	string name;
-	vector<string> listNameFile;
+	string name;					// Cтрока директории
+	vector<string> listNameFile;	// Список файлов директории
+	int getdir(void);				// Поиск в дериктории файлов
 public:
-	ListDir(){};
-	ListDir(string);
+	ListDir(){};					// Конструктор по-умолчнию
+	ListDir(string);				// Конструктор который принимаетстроку дериктории с которой нужно работать
 	~ListDir(){};
 	//void printElementList(string nameFile); непонятно почему не работает!
-	void printDirList(void);
-	int getdir(void);
-};
+	void printDirList(void);		// Вывод на экран списка файлов из директории
+};	
 
 
 #endif

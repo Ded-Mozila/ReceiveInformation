@@ -12,4 +12,12 @@ Settings::Settings(string name): nameFileSettings(name)
 	geopotential = TableGeopotential(hgt.setVector()); // Получение данных о геопотенциале
 	fclose(stdin);
 }
+int Settings::getN()
+{
+	return n;
+}
+string Settings::getNameFile()
+{
+	return nameFileSettings;
+}
 

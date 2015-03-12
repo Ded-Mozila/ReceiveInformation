@@ -14,7 +14,11 @@ int main(int argc, char const *argv[])
 		Тест class Settings
 	*/
 	Settings map("settings");
-	vector<DataImage> img; // Все картинки
-
+	vector<DataImage> img/*(map.getN());*/; // Все картинки
+	for (int i = 0; i < map.getN(); ++i)
+	{
+		// DataImage newIMG(map.setNameFile().c_str(),i*3);
+		// img.push_back(newIMG);
+	}
 	return 0;
 }

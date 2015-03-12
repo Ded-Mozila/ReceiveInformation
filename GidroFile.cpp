@@ -5,10 +5,7 @@ GidroFile::GidroFile(string str): name(str)
 	// open_file.open(str.c_str());
 	OpenFile(str);
 }
-void GidroFile::FindData()
-{
-	
-}
+
 
 void GidroFile::OpenFile(string str)
 {
@@ -33,4 +30,34 @@ void GidroFile::OpenFile(string str)
 		RowVector.clear();
 	}
 	fclose(stdin);
+}
+GidroFile& GidroFile::operator = (const GidroFile& other)
+{
+	this->name = other.setName();
+	this->column = other.setColumn();
+	this->row = other.setRow();
+	this->matrixMap = other.setVector();
+	this->maxElement = other.setMaxElement();
+	this->minElement= other.setMinElement();
+	return *this;
+}
+string GidroFile::setNameFile()
+{
+	return name;
+}
+int GidroFile::setRow()
+{
+	return row;
+}
+int GidroFile::setColumn()
+{
+	return column;
+}
+float GidroFile::setMaxElement()
+{
+	return maxElement;
+}
+float GidroFile::setMinElement()
+{
+	return minElement;
 }
