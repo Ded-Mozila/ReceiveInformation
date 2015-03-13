@@ -58,5 +58,18 @@ void DataImage::WriteFile(string str, VVfloat arr)
 		cout << endl;
 	}
 	fclose(stdout);
+}
 
+void DataImage::MapPmsl()
+{
+	using namespace Data_Lvl;
+	int psSize = ps.size();
+	vector<float> newString;
+	for (int i = 0; i < psSize; ++i)
+	{
+		for (int j = 0; j < ps[i].size(); ++j)
+		{
+			newString.push_back(Pmsl(ps[i][j],ts[i][j],));
+		}
+	}
 }

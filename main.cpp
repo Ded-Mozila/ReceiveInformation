@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 	for (int i = 0; i < map.getIterval(); ++i)
 	{
 		DataImage newIMG(map.getName().c_str(),i*3);
-		
+		newIMG.MapPmsl();		
 		//newIMG.WriteFile
 		img.push_back(newIMG);
 	}
