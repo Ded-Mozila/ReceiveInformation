@@ -1,8 +1,8 @@
-#include "GidroFile.h"
+#include "DataImage.h"
 #include <cmath>
 //#include "namespaceData.h"
 ////////////////////Class DataImage //////////////////////////////
-DataImage::DataImage(const string strDir, int& H):hour(H)
+DataImage::DataImage(const string strDir, int H):hour(H)
 {
 	Open(strDir,hour);
 }
@@ -43,3 +43,20 @@ GidroFile DataImage::GetPs()
 
 DataImage::DataImage(const DataImage& other):hour(other.hour),ps(other.ps),ts(other.ts)
 {}
+
+void DataImage::WriteFile(string str, VVfloat arr)
+{
+
+	freopen(str.c_str(),"w",stdout);
+	int arrSize = arr.size();
+	for (int i = 0; i < arrSize; ++i)
+	{
+		for (int j = 0; j < arr[i].size(); ++j)
+		{
+			cout << arr[i][j] << "    ";
+		}
+		cout << endl;
+	}
+	fclose(stdout);
+
+}

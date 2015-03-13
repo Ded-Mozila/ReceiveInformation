@@ -14,11 +14,12 @@ namespace Data_Lvl
 	VVfloat TableGeopotential(VVfloat); 	// Создание таблицы геопотенциала
 	float TempSurface(float,float,float);	// T* Нахождение температуры на уровне
 
-	float alpha(Gg*Rd/g); 	// фактор снижения температур
-	GidroFile hgt;			//Высота
-	GidroFile lat;			//Широта
-	GidroFile lon;			//Долгота
-	VVfloat geopotential;	//Геопотенциал
+	float alpha(Gg*Rd/g); 					// фактор снижения температур
+	GidroFile hgt;							// Высота
+	GidroFile lat;							// Широта
+	GidroFile lon;							// Долгота
+	VVfloat geopotential;					// Геопотенциал
+	float Pmsl(float,float,float);			// Функция нахождения давлений на уровне земли
 };
 
 float Data_Lvl::SurfaceGeopotential(float z)
@@ -35,19 +36,23 @@ float Data_Lvl::TempSurface(float Tnlev,float Ps,float Pnlev)
 };
 VVfloat Data_Lvl::TableGeopotential(VVfloat ZMap)
 {
-	VVfloat Fs_p;
-	vector<float> fs_p;
-	int N = ZMap.size();
-	int n = ZMap[0].size();// Возможна ошибка в размерноти массива
-	for (int i = 0; i < N; ++i)
-	{
-		for (int j = 0; j < n ; ++j)
-		{
-			fs_p.push_back(SurfaceGeopotential(ZMap[i][j]));
-		}
-		Fs_p.push_back(fs_p);
-		fs_p.clear();
-	}
-	return Fs_p;
+	// VVfloat Fs_p;
+	// vector<float> fs_p;
+	// int N = ZMap.size();
+	// int n = ZMap[0].size();// Возможна ошибка в размерноти массива
+	// for (int i = 0; i < N; ++i)
+	// {
+	// 	for (int j = 0; j < n ; ++j)
+	// 	{
+	// 		fs_p.push_back(SurfaceGeopotential(ZMap[i][j]));
+	// 	}
+	// 	Fs_p.push_back(fs_p);
+	// 	fs_p.clear();
+	// }
+	return ZMap;
 };
+float Data_Lvl::Pmsl(float ps, float T, float F)
+{
+	return (ps*exp((F/(Rd*T))*( 1 - (alpha*F)/(2*Rd*T) + (1/3)*((alpha*F)/(2*Rd*T)))));
+}
 #endif

@@ -7,6 +7,7 @@
 #include <sstream> 
 #include <vector>
 #include <map>
+#include <cmath>
 #include <algorithm>
 #include <sys/types.h>
 #include <dirent.h>
