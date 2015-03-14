@@ -56,9 +56,3 @@ void ListDir::printDirList(void)
 {
 	for_each(listNameFile.begin(), listNameFile.end(), printElementList);
 }
-
-VVfloat GidroFile::setVector()
-{
-	return matrixMap;
-}
-

@@ -15,8 +15,11 @@
 #include <iomanip> // serfill() , setw()
 
 #include <stdio.h> // freeopen()
+//#include "namespaceData.h"
 using namespace std;
+//using namespace Data_Lvl;
 typedef vector<vector<float> > VVfloat;
-string GenNameFile(const string,string);// file.cpp ->
  // Создание строки имени  файла
+string GenNameFile(const string,string);// file.cpp ->
+
 #endif

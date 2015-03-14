@@ -34,5 +34,16 @@ string Settings::getName()
 {
 	return dirFile;
 }
-
-
+void DataImage::MapPmsl()
+{
+	using namespace Data_Lvl;
+	int psSize = ps.sizeMap();
+	vector<float> newString;
+	for (int i = 0; i < psSize; ++i)
+	{
+		for (int j = 0; j < ps.sizeMap(i); ++j)
+		{
+			newString.push_back(Pmsl(ps.At(i,j),ts.At(i,j),hgt.At(i,j)));
+		}
+	}
+}

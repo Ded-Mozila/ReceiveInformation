@@ -67,3 +67,23 @@ GidroFile& GidroFile::operator= (const GidroFile& other)
 	minElement = other.minElement;
 	return *this;
 }
+
+VVfloat GidroFile::setVector()
+{
+	return matrixMap;
+}
+
+float GidroFile::At(int i, int j)
+{
+	return matrixMap[i][j];
+}
+
+long int GidroFile::sizeMap()
+{
+	return matrixMap.size();
+}
+
+long int GidroFile::sizeMap(int i)
+{
+	return matrixMap[i].size();
+}

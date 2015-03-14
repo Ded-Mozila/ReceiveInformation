@@ -1,6 +1,6 @@
 #include "DataImage.h"
-#include <cmath>
 //#include "namespaceData.h"
+#include <cmath>
 ////////////////////Class DataImage //////////////////////////////
 DataImage::DataImage(const string strDir, int H):hour(H)
 {
@@ -60,16 +60,4 @@ void DataImage::WriteFile(string str, VVfloat arr)
 	fclose(stdout);
 }
 
-void DataImage::MapPmsl()
-{
-	using namespace Data_Lvl;
-	int psSize = ps.size();
-	vector<float> newString;
-	for (int i = 0; i < psSize; ++i)
-	{
-		for (int j = 0; j < ps[i].size(); ++j)
-		{
-			newString.push_back(Pmsl(ps[i][j],ts[i][j],));
-		}
-	}
-}
+

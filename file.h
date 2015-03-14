@@ -1,6 +1,7 @@
-#include "header.h"
+
 #ifndef FILE_H
 #define FILE_H
+#include "header.h"
 // Базовый класс для работы с фалами
 class File
 {
@@ -32,6 +33,9 @@ private:
 	float minElement;	// Минимальное значени е в файле
 	VVfloat matrixMap;	// Матрица(сетка) значений относительно карты
 public:
+	float At(int,int);		// Доступ к Матрице по инфекцам
+	long int sizeMap();		// Разсмерность массива
+	long int sizeMap(int);		// Размерность опрделенного массива
 	GidroFile(){};			// Конструктор по умолчанию
 	GidroFile(string);		// Конструктор который принимает строку имени файла	
 	void OpenFile(string);	// Открыйтие и считываение файловых данных	

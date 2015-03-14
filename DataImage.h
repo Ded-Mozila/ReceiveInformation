@@ -1,7 +1,7 @@
-#include "file.h"
 #ifndef DATA_IMAGE_H
 #define DATA_IMAGE_H 
-
+#include "file.h"
+//#include "settings.h"
 class DataImage
 {
 private:
@@ -22,6 +22,6 @@ public:
 	void swap(DataImage&,DataImage&);			// Перег			 	урзка swap()
 	DataImage(const DataImage&);				// Конструктор копирования
 	void WriteFile(string,VVfloat);			 	// Запись в файл данных (сетки)
-	void MapPmsl();							// Получение сетки давления на уровне моря
+	void MapPmsl();								// Получение сетки давления на уровне моря
 };
 #endif
