@@ -33,12 +33,12 @@ private:
 	float minElement;	// Минимальное значени е в файле
 	VVfloat matrixMap;	// Матрица(сетка) значений относительно карты
 public:
-	float At(int,int);		// Доступ к Матрице по инфекцам
-	long int sizeMap();		// Разсмерность массива
+	float At(int,int);			// Доступ к Матрице по инфекцам
+	long int sizeMap();			// Разсмерность массива
 	long int sizeMap(int);		// Размерность опрделенного массива
-	GidroFile(){};			// Конструктор по умолчанию
-	GidroFile(string);		// Конструктор который принимает строку имени файла	
-	void OpenFile(string);	// Открыйтие и считываение файловых данных	
+	GidroFile(){};				// Конструктор по умолчанию
+	GidroFile(string);			// Конструктор который принимает строку имени файла	
+	void OpenFile(string);		// Открыйтие и считываение файловых данных	
 	VVfloat setVector(void);	// Возвращает значение 
 	string setName(void);		// Возвращает имя файла
 	int setColumn(void);		// Возвращает длину столбца матрицы

@@ -11,7 +11,7 @@ void DataImage::Open(const string strDir, int H)
 	ps.OpenFile(GenNameFile(strDir,genName(H,"ps")));
 	ts.OpenFile(GenNameFile(strDir,genName(H,"ts")));
 }
-string DataImage::genName(int& h,const string str)
+string DataImage::genName(int h,const string str)
 {
 	stringstream ss;
 	ss << str << '_'<< setfill ('0') << setw (3) << h << ".grd";
@@ -44,16 +44,19 @@ GidroFile DataImage::GetPs()
 DataImage::DataImage(const DataImage& other):hour(other.hour),ps(other.ps),ts(other.ts)
 {}
 
-void DataImage::WriteFile(string str, VVfloat arr)
+void DataImage::WriteFile(string str)
 {
-
-	freopen(str.c_str(),"w",stdout);
-	int arrSize = arr.size();
+	if (presureS.empty())
+	{
+		cout << "empty"<< endl;
+	}
+	freopen(str.c_str(),"w+",stdout);
+	int arrSize = presureS.size();
 	for (int i = 0; i < arrSize; ++i)
 	{
-		for (int j = 0; j < arr[i].size(); ++j)
+		for (int j = 0; j < presureS[i].size(); ++j)
 		{
-			cout << arr[i][j] << "    ";
+			cout << presureS[i][j] << "    ";
 		}
 		cout << endl;
 	}

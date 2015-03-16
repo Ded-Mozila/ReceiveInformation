@@ -16,12 +16,12 @@ public:
 	GidroFile GetPs(void);
 	GidroFile GetTs(void);
 	int GetHour(void);							// Сколько часов
-	string genName(int&,const string);			// Создание имени файла
+	string genName(int,const string);			// Создание имени файла
 	void Open(const string,int);				// Открытие файла
 	DataImage& operator = (const DataImage&);	// Оператор присваивания
 	void swap(DataImage&,DataImage&);			// Перег			 	урзка swap()
 	DataImage(const DataImage&);				// Конструктор копирования
-	void WriteFile(string,VVfloat);			 	// Запись в файл данных (сетки)
+	void WriteFile(string);			 			// Запись в файл данных (сетки)
 	void MapPmsl();								// Получение сетки давления на уровне моря
 };
 #endif

@@ -13,10 +13,12 @@ int main(int argc, char const *argv[])
 	*/
 	Settings map("/home/aleks/Aleksander/study/Credential/Project/ReceiveInformation_1/settings.txt");
 	vector<DataImage> img/*(map.getN());*/; // Все картинки
-	for (int i = 0; i < map.getIterval(); ++i)
+	for (int i = 0; i < map.getN()+1; i=i+3)
 	{
-		DataImage newIMG(map.getName().c_str(),i*3);
-		newIMG.MapPmsl();		
+		DataImage newIMG(map.getName().c_str(),i);
+		newIMG.MapPmsl();
+	// cout << GenNameFile(map.getName().c_str(),newIMG.genName(i*3,"ps")) << endl;
+		newIMG.WriteFile("FILE/presure.txt");		
 		//newIMG.WriteFile
 		img.push_back(newIMG);
 	}

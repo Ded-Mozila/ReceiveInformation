@@ -9,32 +9,37 @@ GidroFile::GidroFile(string str): name(str)
 
 void GidroFile::OpenFile(string str)
 {
-	if(freopen(str.c_str(),"r",stdin))
-	{	
-		string index;
-		cin >> index;
+	// if(freopen(str.c_str(),"r",stdin))
+	// {	
+	cout << "Open file " << str << endl; 
+		freopen(str.c_str(),"r",stdin);
+		string strDDD;
+		cin >> strDDD;
 		cin >> row >> column;
 		int i = 0,j = 0;
 		cin >> i >> j;// Считывание размерности массива
 		cin >> i >> j;// Считывание размерности массива
 		cin >> minElement >> maxElement;
-		vector<float> RowVector;
+		cout << row <<" " << column<< endl;
 		for (i = 0; i < row; ++i)
 		{
+			vector<float> RowVector;
 			for (j = 0; j < column; ++j)
 			{
 				float index = -1 ;
 				cin >> index;
+				//cout << index << endl;
 				RowVector.push_back(index);
 			}
 			matrixMap.push_back(RowVector);
-			RowVector.clear();
+			//RowVector.clear();
 		}
+		cout << matrixMap.size() << endl; 
 		fclose(stdin);
-	}
-	else{
-		cout << "File! " << str.c_str()<< endl;
-	}
+	// }
+	// else{
+	// 	cout << "File! " << str.c_str()<< endl;
+	// }
 }
 string GidroFile::setName(void)
 {
