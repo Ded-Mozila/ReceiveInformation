@@ -13,7 +13,8 @@
 #include <dirent.h>
 #include <errno.h>
 #include <iomanip> // serfill() , setw()
-
+#include <cmath>
+#include <cstdlib> // itoa()
 #include <stdio.h> // freeopen()
 //#include "namespaceData.h"
 using namespace std;
@@ -21,5 +22,5 @@ using namespace std;
 typedef vector<vector<float> > VVfloat;
  // Создание строки имени  файла
 string GenNameFile(const string,string);// file.cpp ->
-
+string GetStringInt(int);// file.cpp ->
 #endif

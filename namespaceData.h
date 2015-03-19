@@ -53,6 +53,7 @@ VVfloat Data_Lvl::TableGeopotential(VVfloat ZMap)
 };
 float Data_Lvl::Pmsl(float ps, float T, float F)
 {
+	F = F*g;
 	return (ps*exp((F/(Rd*T))*( 1 - (alpha*F)/(2*Rd*T) + (1/3)*((alpha*F)/(2*Rd*T)))));
 }
 #endif

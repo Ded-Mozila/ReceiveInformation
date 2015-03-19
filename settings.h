@@ -11,6 +11,7 @@ private:
 public:
 	Settings(){};
 	~Settings(){};
+	int OpenSettings(string); 		// Открытие файла с настройками и считывание директории	
 	Settings(string);
 	int getN();
 	int getIntarval();

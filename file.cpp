@@ -9,6 +9,14 @@ string GenNameFile(const string dir,string fileName) // -> header.h
 	ss >> str;
 	return str;
 };
+string GetStringInt(int i)// -> header.h
+{
+	string str;
+	stringstream ss;
+	ss << i;
+	ss >> str;
+	return str;
+}
 // File::File(){};
 // File::~File(){};
 File::File(string Name):name(Name)

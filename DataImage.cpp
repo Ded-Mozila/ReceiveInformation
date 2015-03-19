@@ -1,6 +1,5 @@
 #include "DataImage.h"
-//#include "namespaceData.h"
-#include <cmath>
+
 ////////////////////Class DataImage //////////////////////////////
 DataImage::DataImage(const string strDir, int H):hour(H)
 {
@@ -46,21 +45,20 @@ DataImage::DataImage(const DataImage& other):hour(other.hour),ps(other.ps),ts(ot
 
 void DataImage::WriteFile(string str)
 {
-	if (presureS.empty())
-	{
-		cout << "empty"<< endl;
-	}
-	freopen(str.c_str(),"w+",stdout);
+	ofstream file(str.c_str());
 	int arrSize = presureS.size();
+	file << "DSAA\n  " << arrSize << "  " << presureS[0].size() << endl \
+		<<  " 1  " << arrSize << endl \
+		<<  " 1  " << presureS[0].size() << endl \
+		<<  " min   max \n";
+		file.fill (' '); 
 	for (int i = 0; i < arrSize; ++i)
 	{
 		for (int j = 0; j < presureS[i].size(); ++j)
 		{
-			cout << presureS[i][j] << "    ";
+			file << presureS[i][j] << "    ";
 		}
-		cout << endl;
+		file << '\n';
 	}
-	fclose(stdout);
+	file.close();
 }
-
-
