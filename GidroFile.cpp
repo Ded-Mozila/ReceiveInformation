@@ -18,9 +18,9 @@ void GidroFile::OpenFile(string str)
 	cin >> i >> j;// Считывание размерности массива
 	cin >> minElement >> maxElement;
 	vector<float> RowVector;
-	for (i = 0; i < row; ++i)
+	for (i = 0; i < column; ++i)
 	{
-		for (j = 0; j < column; ++j)
+		for (j = 0; j < row; ++j)
 		{
 			float index = -1 ;
 			cin >> index;
