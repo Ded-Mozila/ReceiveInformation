@@ -20,6 +20,8 @@ namespace Data_Lvl
 	GidroFile lon;							// Долгота
 	VVfloat geopotential;					// Геопотенциал
 	float Pmsl(float,float,float);			// Функция нахождения давлений на уровне земли
+	VVfloat  HorizontalInterpolation(VVfloat);	//Горизонтальная интерполяция
+
 };
 
 float Data_Lvl::SurfaceGeopotential(float z)
@@ -55,5 +57,19 @@ float Data_Lvl::Pmsl(float ps, float T, float F)
 {
 	F = F*g;
 	return (ps*exp((F/(Rd*T))*( 1 - (alpha*F)/(2*Rd*T) + (1/3)*((alpha*F)/(2*Rd*T)))));
+}
+VVfloat Data_Lvl::HorizontalInterpolation(VVfloat pi,VVfloat &p)
+{
+	VVfloat new_pi(pi);	//n+1 - итерация метода Гаусса-Зейделя
+	int n = pi.size();
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < nn; ++j)
+		{
+			//Учесть граничные случаи для которых некоторых элементов не существует!!!!!
+			new_pi[i][j] = 0.25*(new_pi[i-1][j] + pi[i+1][j] + new_pi[i][j-1] + pi[i][j+1]  - (p[i-1][j] + p[i+1][j] + p[i][j-1] + p[i][j+1] - 4*p[i][j]));
+		}
+	}
+	return new_pi;
 }
 #endif
