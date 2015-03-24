@@ -13,9 +13,40 @@ string GetStringInt(int i)// -> header.h
 {
 	string str;
 	stringstream ss;
-	ss << i;
+	ss <<  setfill ('0')\
+	<< setw (2) << i;
 	ss >> str;
 	return str;
+}
+
+bool mkdirp(const char* path, mode_t mode) //Создание дерева директории
+{
+	// const cast for hack
+	char* p = const_cast<char*>(path);
+	// Do mkdir for each slash until end of string or error
+	while (*p != '\0') 
+	{
+		// Skip first character
+		p++;
+		// Find first slash or end
+		while(*p != '\0' && *p != '/') p++;
+
+		// Remember value from p
+		char v = *p;
+
+		// Write end of string at p
+		*p = '\0';
+
+		// Create folder from path to '\0' inserted at p
+		if(mkdir(path, mode) == -1 && errno != EEXIST) 
+		{
+			*p = v;
+			return false;
+		}
+		// Restore path to it's former glory
+		*p = v;
+	}
+	return true;
 }
 // File::File(){};
 // File::~File(){};

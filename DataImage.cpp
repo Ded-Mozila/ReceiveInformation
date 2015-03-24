@@ -9,6 +9,7 @@ void DataImage::Open(const string strDir, int H)
 {
 	ps.OpenFile(GenNameFile(strDir,genName(H,"ps")));
 	ts.OpenFile(GenNameFile(strDir,genName(H,"ts")));
+	hgt.OpenFile(GenNameFile(strDir,"hgt.grd"));
 }
 string DataImage::genName(int h,const string str)
 {
@@ -51,7 +52,6 @@ void DataImage::WriteFile(string str)
 		<<  " 1  " << arrSize << endl \
 		<<  " 1  " << presureS[0].size() << endl \
 		<<  " min   max \n";
-		file.fill (' '); 
 	for (int i = 0; i < arrSize; ++i)
 	{
 		for (int j = 0; j < presureS[i].size(); ++j)
@@ -61,4 +61,9 @@ void DataImage::WriteFile(string str)
 		file << '\n';
 	}
 	file.close();
+}
+
+void DataImage::addHgt(GidroFile& file)
+{
+	hgt = file;
 }

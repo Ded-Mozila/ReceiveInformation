@@ -15,13 +15,13 @@ namespace Data_Lvl
 	float TempSurface(float,float,float);	// T* Нахождение температуры на уровне
 
 	float alpha(Gg*Rd/g); 					// фактор снижения температур
-	GidroFile hgt;							// Высота
-	GidroFile lat;							// Широта
-	GidroFile lon;							// Долгота
+	// GidroFile hgt;							// Высота
+	// GidroFile lat;							// Широта
+	// GidroFile lon;							// Долгота
 	VVfloat geopotential;					// Геопотенциал
 	float Pmsl(float,float,float);			// Функция нахождения давлений на уровне земли
-	VVfloat  HorizontalInterpolation(VVfloat);	//Горизонтальная интерполяция
-
+	VVfloat Interpolation(VVfloat,VVfloat);	// Горизонтальная интерполяция
+	bool tableBorder(int,int,int,int);		// Проверка на граничные услосвия
 };
 
 float Data_Lvl::SurfaceGeopotential(float z)
@@ -58,18 +58,23 @@ float Data_Lvl::Pmsl(float ps, float T, float F)
 	F = F*g;
 	return (ps*exp((F/(Rd*T))*( 1 - (alpha*F)/(2*Rd*T) + (1/3)*((alpha*F)/(2*Rd*T)))));
 }
-VVfloat Data_Lvl::HorizontalInterpolation(VVfloat pi,VVfloat &p)
+VVfloat Data_Lvl::Interpolation(VVfloat pi,VVfloat p)
 {
 	VVfloat new_pi(pi);	//n+1 - итерация метода Гаусса-Зейделя
 	int n = pi.size();
+	int nn = pi[0].size();
 	for (int i = 0; i < n; ++i)
-	{
 		for (int j = 0; j < nn; ++j)
-		{
-			//Учесть граничные случаи для которых некоторых элементов не существует!!!!!
-			new_pi[i][j] = 0.25*(new_pi[i-1][j] + pi[i+1][j] + new_pi[i][j-1] + pi[i][j+1]  - (p[i-1][j] + p[i+1][j] + p[i][j-1] + p[i][j+1] - 4*p[i][j]));
-		}
-	}
+			if(tableBorder(i,j,n,nn)) // Проверка на граничные случаи
+				new_pi[i][j] = 0.25*(new_pi[i-1][j] + pi[i+1][j] + new_pi[i][j-1] + pi[i][j+1]  - (p[i-1][j] + p[i+1][j] + p[i][j-1] + p[i][j+1] - 4*p[i][j]));
 	return new_pi;
+}
+
+bool Data_Lvl::tableBorder(int i, int j, int n, int N)
+{
+	if(( i == 0 || i == (n-1) ) || ( j == 0 || j == (N-1)))
+		return false;
+	else 
+		return true;
 }
 #endif

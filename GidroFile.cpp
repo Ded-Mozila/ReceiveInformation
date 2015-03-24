@@ -6,7 +6,6 @@ GidroFile::GidroFile(string str): name(str)
 	OpenFile(str);
 }
 
-
 void GidroFile::OpenFile(string str)
 {
 	string strDDD;

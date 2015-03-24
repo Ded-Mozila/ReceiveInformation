@@ -5,9 +5,14 @@
 class DataImage
 {
 private:
-	GidroFile ps;		// Давление на уровне земли
-	GidroFile ts;		// Температура на уроввне земли
-	VVfloat presureS;	// Давление на уровне моря!
+	GidroFile ps;							// Давление на уровне земли
+	GidroFile ts;							// Температура на уроввне земли
+	VVfloat presureS;						// Давление на уровне моря!
+	vector<VVfloat> gif;					// Все изменения за 20 итераций
+	GidroFile hgt;							// Высота
+	GidroFile lat;							// Широта
+	GidroFile lon;							// Долгота
+	VVfloat geopotential;					// Геопотенциал
 	int hour; // час замера
 public:
 	DataImage(){};
@@ -22,6 +27,8 @@ public:
 	void swap(DataImage&,DataImage&);			// Перег			 	урзка swap()
 	DataImage(const DataImage&);				// Конструктор копирования
 	void WriteFile(string);			 			// Запись в файл данных (сетки)
-	void MapPmsl();								// Получение сетки давления на уровне моря
+	void MapPmsl();	//-> settings.cpp			// Получение сетки давления на уровне моря
+	void HorizontalInterpolation_gif();			//-> settings.cpp	Горизонтальная интерполяция
+	void addHgt(GidroFile&);
 };
 #endif

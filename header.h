@@ -10,6 +10,7 @@
 #include <cmath>
 #include <algorithm>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <dirent.h>
 #include <errno.h>
 #include <iomanip> // serfill() , setw()
@@ -23,4 +24,5 @@ typedef vector<vector<float> > VVfloat;
  // Создание строки имени  файла
 string GenNameFile(const string,string);// file.cpp ->
 string GetStringInt(int);// file.cpp ->
+bool mkdirp(const char* path, mode_t mode);// file.cpp ->
 #endif
