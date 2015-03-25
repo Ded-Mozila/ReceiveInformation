@@ -68,7 +68,7 @@ ListDir::ListDir(string Dir):name(Dir)
 {
 	listNameFile = vector<string>();
 	getdir();
-	printDirList();
+	//printDirList();
 }
 int ListDir::getdir(void)
 {
@@ -94,4 +94,17 @@ void printElementList(string nameFile)
 void ListDir::printDirList(void)
 {
 	for_each(listNameFile.begin(), listNameFile.end(), printElementList);
+}
+
+void ListDir::printDirListVector(vector<string> & fn)
+{
+	for_each(fn.begin(), fn.end(), printElementList);
+}
+vector<string> ListDir::findFile(string str)
+{
+	vector<string> fn;
+	for (int i = 0; i < listNameFile.size(); ++i)
+		if(listNameFile[i].find(str.c_str()) != std::string::npos)
+			fn.push_back(listNameFile[i]);
+	return fn;
 }

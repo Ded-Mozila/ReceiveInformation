@@ -1,17 +1,11 @@
 #include "DataImage.h"
 #include "settings.h"
 #include "stdlib.h"
-int main(int argc, char const *argv[])
-{
-	// string name ("/home/aleks/Aleksander/study/Credential/sasha_diplom_data/2013.12.11");
-	// ListDir Dir(name);
-	//string nameDir("/home/aleks/Aleksander/study/Credential/sasha_diplom_data/2013.12.11/");
 
-	// GidroFile A("/home/aleks/Aleksander/study/Credential/sasha_diplom_data/2013.12.11/ps_000.grd");
-	
-	/*
-		Тест class Settings
-	*/
+
+
+int test_1(void)
+{
 	Settings map("settings.txt");
 	vector<vector<DataImage> > listGif;
 	int mapSize = map.getListSize();
@@ -38,5 +32,24 @@ int main(int argc, char const *argv[])
 		}
 		//listGif.push_back(img);
 	}
+	return 0;
+}
+
+void test_2(void)
+{
+	Settings map("settings.txt");
+	ListDir test(map.getName(0));	// Start 1 dir
+	
+	vector<string> fps 	= test.findFile("ps");
+	vector<string> fts 	= test.findFile("ts");
+	vector<string> fP_1	= test.findFile("P_1");
+	test.printDirListVector(fps);
+	test.printDirListVector(fts);
+	test.printDirListVector(fP_1);
+}
+int main(int argc, char const *argv[])
+{
+	//int test = test_1();
+	test_2();
 	return 0;
 }

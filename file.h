@@ -64,6 +64,8 @@ public:
 	~ListDir(){};
 	//void printElementList(string nameFile); непонятно почему не работает!
 	void printDirList(void);		// Вывод на экран списка файлов из директории
+	void printDirListVector(vector<string> &);		// Вывод на экран списка файлов из директории
+	vector<string> findFile(string);			// Поиск файлов
 };	
 
 
