@@ -69,7 +69,7 @@ void Settings::printInFile(string str,GidroFile grd)
 	file_grd << "DSAA\n  " << grd.sizeMap() << "  " << grd.sizeMap(0) << endl \
 		<<  " 1  " << grd.sizeMap() << endl \
 		<<  " 1  " << grd.sizeMap(0)<< endl \
-		<<  " min   max \n";
+		<<  " min  "<< grd.setMinElement()<<" \n";
 	for (int i = 0; i < grd.sizeMap(); ++i)
 	{
 		for (int j = 0; j < grd.sizeMap(i); ++j)
@@ -117,3 +117,15 @@ void DataImage::HorizontalInterpolation_gif()
 	presureS = gif[1];
 }
 
+void DataImage::HorizontalInterpolation_gif(VVfloat P)
+{
+	// void<float> row(500, 1000.0); 
+	// VVfloat Pi(400,row);
+	// VVfloat p(ps.setVector());
+	// for (int i = 1; i < gif.size(); ++i)
+	// {
+	// 	gif[i] = Interpolation(gif[i-1],p);
+	// 	cout << i << endl;
+	// }
+	// presureS = gif[1];
+}

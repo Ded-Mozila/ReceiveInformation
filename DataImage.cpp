@@ -11,6 +11,12 @@ void DataImage::Open(const string strDir, int H)
 	ts.OpenFile(GenNameFile(strDir,genName(H,"ts")));
 	hgt.OpenFile(GenNameFile(strDir,"hgt.grd"));
 }
+void DataImage::Open(const string strDirPs,const string strDirTs,const string strDirHgt)
+{
+	ps.OpenFile(strDirPs);
+	ts.OpenFile(strDirTs);
+	hgt.OpenFile(strDirHgt);
+}
 string DataImage::genName(int h,const string str)
 {
 	stringstream ss;

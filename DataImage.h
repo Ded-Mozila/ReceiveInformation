@@ -18,17 +18,20 @@ public:
 	DataImage(){};
 	~DataImage(){};
 	DataImage(const string,int); //Получение данных из файла с указанным именем
+	DataImage(const string,const string,const string); //Получение данных из файла с указанным именем
 	GidroFile GetPs(void);
 	GidroFile GetTs(void);
 	int GetHour(void);							// Сколько часов
 	string genName(int,const string);			// Создание имени файла
 	void Open(const string,int);				// Открытие файла
+	void Open(const string,const string ,const string );
 	DataImage& operator = (const DataImage&);	// Оператор присваивания
 	void swap(DataImage&,DataImage&);			// Перег			 	урзка swap()
 	DataImage(const DataImage&);				// Конструктор копирования
 	void WriteFile(string);			 			// Запись в файл данных (сетки)
 	void MapPmsl();	//-> settings.cpp			// Получение сетки давления на уровне моря
 	void HorizontalInterpolation_gif();			//-> settings.cpp	Горизонтальная интерполяция
+	void HorizontalInterpolation_gif(VVfloat);			//-> settings.cpp	Горизонтальная интерполяция
 	void addHgt(GidroFile&);
 };
 #endif

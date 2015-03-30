@@ -5,7 +5,10 @@ GidroFile::GidroFile(string str): name(str)
 	// open_file.open(str.c_str());
 	OpenFile(str);
 }
-
+GidroFile::GidroFile(VVfloat bd):matrixMap(bd)
+{
+	minElement = 1000;
+}
 void GidroFile::OpenFile(string str)
 {
 	string strDDD;

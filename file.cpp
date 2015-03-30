@@ -48,8 +48,6 @@ bool mkdirp(const char* path, mode_t mode) //Создание дерева ди�
 	}
 	return true;
 }
-// File::File(){};
-// File::~File(){};
 File::File(string Name):name(Name)
 {
 	open_file.open(name.c_str(),ios_base::in);	
@@ -105,6 +103,9 @@ vector<string> ListDir::findFile(string str)
 	vector<string> fn;
 	for (int i = 0; i < listNameFile.size(); ++i)
 		if(listNameFile[i].find(str.c_str()) != std::string::npos)
+		{
 			fn.push_back(listNameFile[i]);
+			cout << listNameFile[i] << endl;
+		}
 	return fn;
 }

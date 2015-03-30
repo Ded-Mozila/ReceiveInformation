@@ -38,6 +38,7 @@ public:
 	long int sizeMap(int);		// Размерность опрделенного массива
 	GidroFile(){};				// Конструктор по умолчанию
 	GidroFile(string);			// Конструктор который принимает строку имени файла	
+	GidroFile(VVfloat);
 	void OpenFile(string);		// Открыйтие и считываение файловых данных	
 	VVfloat setVector(void);	// Возвращает значение 
 	string setName(void);		// Возвращает имя файла
