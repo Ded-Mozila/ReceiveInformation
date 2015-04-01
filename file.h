@@ -59,6 +59,7 @@ private:
 	string name;					// Cтрока директории
 	vector<string> listNameFile;	// Список файлов директории
 	int getdir(void);				// Поиск в дериктории файлов
+	vector<string> findList(vector<string>,string);	//Посик подстраки в массиве
 public:
 	ListDir(){};					// Конструктор по-умолчнию
 	ListDir(string);				// Конструктор который принимаетстроку дериктории с которой нужно работать
@@ -66,7 +67,8 @@ public:
 	//void printElementList(string nameFile); непонятно почему не работает!
 	void printDirList(void);		// Вывод на экран списка файлов из директории
 	void printDirListVector(vector<string> &);		// Вывод на экран списка файлов из директории
-	vector<string> findFile(string);			// Поиск файлов
+	vector<string> findFile(string);				// Поиск файлов
+	vector<string> findFileHour(string, string);	// Поиск в директории файлов по наименованию и часу
 };	
 
 

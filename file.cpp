@@ -98,14 +98,23 @@ void ListDir::printDirListVector(vector<string> & fn)
 {
 	for_each(fn.begin(), fn.end(), printElementList);
 }
-vector<string> ListDir::findFile(string str)
+
+vector<string> ListDir::findList(vector<string> listFn,string str)
 {
 	vector<string> fn;
-	for (int i = 0; i < listNameFile.size(); ++i)
-		if(listNameFile[i].find(str.c_str()) != std::string::npos)
+	for (int i = 0; i < listFn.size(); ++i)
+		if(listFn[i].find(str.c_str()) != std::string::npos)
 		{
-			fn.push_back(listNameFile[i]);
-			cout << listNameFile[i] << endl;
+			fn.push_back(listFn[i]);
 		}
 	return fn;
+}
+vector<string> ListDir::findFile(string str)
+{
+	return findList(listNameFile,str);
+}
+
+vector<string> ListDir::findFileHour(string str, string h)
+{
+	return findList(findList(listNameFile,str),h);
 }

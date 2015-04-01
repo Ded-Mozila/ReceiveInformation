@@ -19,7 +19,6 @@ int  Settings::OpenSettings(string str)
 	for (int i = 0; i < N; ++i)
 	{
 		cin >> dirList[i];
-		cout << dirList[i] << endl;
 	}
 	fclose(stdin);
 	return 0;
@@ -57,7 +56,6 @@ string Settings::getNameMakeDir(int i)
 	{
 		unsigned last = dirList[i].find_last_of("/\\");
 		string str(dirList[i].substr(0,last));
-		cout << str << endl;
 		unsigned first =str.find_last_of("/\\");
 		return GenNameFile(dirFile,dirList[i].substr(first+1));
 	}
@@ -112,7 +110,6 @@ void DataImage::HorizontalInterpolation_gif()
 	for (int i = 1; i < gif.size(); ++i)
 	{
 		gif[i] = Interpolation(gif[i-1],p);
-		cout << i << endl;
 	}
 	presureS = gif[1];
 }
