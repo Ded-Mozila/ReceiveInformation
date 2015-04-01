@@ -104,10 +104,44 @@ void test_3()
 	}
 
 }
+//Удачиный тест программы
+void test_4()
+{
+	Settings map("settings.txt");
+	int  q = 0;
+	ListDir test(map.getName(q));	// Start 1 dir /2013.12.11/
+	string nameMKD(map.getNameMakeDir(q));
+	mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	vector<string> nlev;	// Список уровней
+	//получение списка уравней
+		string str;
+		ifstream file_nlev("nlev.txt");
+		while(file_nlev >> str)
+			nlev.push_back(str);
+		int count = nlev.size();
+		file_nlev.close();
+	// Получение налального приближенного даления на уровне моря
+		cout << "Open file: ps_" << 72 << endl;
+		DataImage newIMG(map.getName(q),72);
+		cout << "Good Open file: ps_" << 72 << endl;
+		newIMG.MapPmsl();
+	////////////////////////////////////////////////////////////
+	VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
+	// N операций отколичества итераций
+	for (int ilev = 0; ilev < count; ++ilev)
+	{
+		GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
+		pi = HInterpolation(pi,p.setVector());
+		//cout << nlev[ilev] << endl;
+	}
+	GidroFile gif(pi);
+	map.printInFile(GenNameFile(nameMKD,"test2.txt"),gif);	
+}
 int main(int argc, char const *argv[])
 {
 	//int test = test_1();
 	//test_2();
-	test_3();
+	//test_3();
+	test_4();
 	return 0;
 }

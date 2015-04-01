@@ -129,3 +129,7 @@ void DataImage::HorizontalInterpolation_gif(VVfloat P)
 	// }
 	// presureS = gif[1];
 }
+VVfloat HInterpolation(VVfloat pi, VVfloat p)
+{
+	return Interpolation(pi,p);
+}

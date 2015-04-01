@@ -73,3 +73,8 @@ void DataImage::addHgt(GidroFile& file)
 {
 	hgt = file;
 }
+
+VVfloat DataImage::getPresure()
+{
+	return presureS;
+}

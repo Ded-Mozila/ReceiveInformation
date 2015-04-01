@@ -25,4 +25,5 @@ typedef vector<vector<float> > VVfloat;
 string GenNameFile(const string,string);// file.cpp ->
 string GetStringInt(int);// file.cpp ->
 bool mkdirp(const char* path, mode_t mode);// file.cpp ->
+VVfloat HInterpolation(VVfloat,VVfloat);
 #endif

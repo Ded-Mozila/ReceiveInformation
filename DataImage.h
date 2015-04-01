@@ -33,5 +33,6 @@ public:
 	void HorizontalInterpolation_gif();			//-> settings.cpp	Горизонтальная интерполяция
 	void HorizontalInterpolation_gif(VVfloat);			//-> settings.cpp	Горизонтальная интерполяция
 	void addHgt(GidroFile&);
+	VVfloat getPresure();						// Вывод из классса коннечных данных
 };
 #endif
