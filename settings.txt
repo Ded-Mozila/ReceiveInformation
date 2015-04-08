@@ -1,4 +1,4 @@
-/home/aleks/Aleksander/study/Credential/Project/ReceiveInformation_1/FILE/
+/home/aleks/Aleksander/study/Credential/Project/ReceiveInformation_1/FILE
 4
 /home/aleks/Aleksander/study/Credential/sasha_diplom_data/2013.12.11/
 /home/aleks/Aleksander/study/Credential/sasha_diplom_data/2014.04.11/

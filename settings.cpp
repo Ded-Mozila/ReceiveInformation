@@ -57,7 +57,8 @@ string Settings::getNameMakeDir(int i)
 		unsigned last = dirList[i].find_last_of("/\\");
 		string str(dirList[i].substr(0,last));
 		unsigned first =str.find_last_of("/\\");
-		return GenNameFile(dirFile,dirList[i].substr(first+1));
+		//return GenNameFile(dirFile,dirList[i].substr(first+1));
+		return dirList[i].substr(first+1);
 	}
 	return "0";
 }

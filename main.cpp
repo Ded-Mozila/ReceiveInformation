@@ -137,8 +137,9 @@ void test_4()
 	GidroFile gif(pi);
 	map.printInFile(GenNameFile(nameMKD,"test2.txt"),gif);	
 }
-void test_4_1()
+void test_4_1(int iterm)//рабочий тест
 {
+	cout <<"Count interpolation = "<< iterm << endl;
 	Settings map("settings.txt");
 	// Обход директорий
 	vector<string> lev;	// Список уровней
@@ -156,27 +157,28 @@ void test_4_1()
 	{
 		cout << map.getName(q) << endl;
 		ListDir dir(map.getName(q));
-		string nameMKD(map.getNameMakeDir(q));
+		string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GetStringInt(iterm)),"/"),map.getNameMakeDir(q)));
+
 		mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-		int k = 0;
+		vector<string> pslev(dir.findFile("ps_"));
 		/// Работа с каждой часовой отметкой
-		for (int h = 0; h < 73; h=h+3)
+		int ps_size = pslev.size();//Количество чесовых отметок
+		for (int h = 0; h < ps_size; ++h)
 		{
-			vector<string> nlev = dir.findFileHour("P_",lev[k]);
-			k++;
+			vector<string> nlev = dir.findFileHour("P_",lev[h]);
 			if(!nlev.empty())
 			{
-				DataImage newIMG(map.getName(q),h);
-				cout << "Good Open file: ps_" << h << endl;
+				DataImage newIMG(map.getName(q),h*3);
+				cout << "Good Open file: ps_" << h*3 << endl;
 				newIMG.MapPmsl();
 				VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
-				for (int ilev = 0; ilev < count; ++ilev)
+				for (int ilev = 0; ilev < iterm; ++ilev)
 				{
 					GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
 					pi = HInterpolation(pi,p.setVector());
 				}
 				GidroFile gif(pi);
-				string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h)),".txt"));
+				string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
 				map.printInFile(strName,gif);
 			}
 		}	
@@ -188,6 +190,6 @@ int main(int argc, char const *argv[])
 	//int test = test_1();
 	//test_2();
 	//test_3();
-	test_4_1();
+	test_4_1(atoi(argv[1]));
 	return 0;
 }
