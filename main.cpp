@@ -185,11 +185,61 @@ void test_4_1(int iterm)//рабочий тест
 	}
 	
 }
+void test_4_2()//Проверка Алгоритма
+{
+	Settings map("settings.txt");
+	vector<string> lev;	// Список уровней
+		string str;
+		ifstream file_nlev("nlev.txt");
+		while(file_nlev >> str)
+		{
+			lev.push_back(str);
+			cout << str << endl;	
+		}
+		int count = lev.size();
+		file_nlev.close();
+	//////////////////////////////////////////
+	// Обход директорий
+	for (int q = 0; q < map.getListSize(); ++q)
+	{
+		cout << map.getName(q) << endl;
+		ListDir dir(map.getName(q));
+		vector<string> pslev(dir.findFile("ps_"));
+		/// Работа с каждой часовой отметкой
+		int ps_size = pslev.size();//Количество чесовых отметок
+		for (int h = 0; h < ps_size; ++h)
+		{
+			vector<string> nlev = dir.findFileHour("P_",lev[h]);
+			if(!nlev.empty())
+			{
+				DataImage newIMG(map.getName(q),h*3);
+				cout << "Good Open file: ps_" << h*3 << endl;
+				newIMG.MapPmsl();
+				VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
+				for (int ilev = 0; ilev < 30; ++ilev)
+				{
+					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
+					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+					GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
+					pi_new = HInterpolation(pi,p.setVector());
+					GidroFile gif(pi_new);
+					// Статистика
+					statisticsFun(pi,pi_new);
+					pi = pi_new;
+					string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
+					map.printInFile(strName,gif);
+				}
+			}
+		}	
+	}
+	
+}
 int main(int argc, char const *argv[])
 {
 	//int test = test_1();
 	//test_2();
 	//test_3();
-	test_4_1(atoi(argv[1]));
+//	test_4_1(atoi(argv[1]));
+	test_4_2();
 	return 0;
 }
