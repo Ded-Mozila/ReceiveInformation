@@ -1,10 +1,19 @@
 #include "statistics.h"
 
-void statisticsFun(const VVfloat& pi,const VVfloat& pi_new,const string& nameFile)
+void statisticsFun(const VVfloat& pi,const VVfloat& pi_new,const string& nameFile, int i)
 {
 	vector<float> defferences(TableDifferences(pi,pi_new));
 	sort(defferences.begin(),defferences.end());
-	float rms = RMS(defferences);
+	ofstream fileStatistics(nameFile.c_str(),std::ofstream::out | std::ofstream::app);
+	float M(ExpectedValue(defferences));
+	float X_am(AM(defferences));
+	fileStatistics << "Interpolation " << i \
+	<< "\nArithmetic mean 	:" << X_am \
+	<< "\nRoot mean square 	:" << RMS(defferences) \
+	<< "\nExpected value 	:" 	<< M \
+	<< "\nVariance			:" << Variance(defferences,M) \
+	<< "\nStandard Deviation:" << StandardDeviation(defferences,X_am) << '\n';
+	fileStatistics.close();
 }
 
 vector<float> TableDifferences(const VVfloat& pi ,const VVfloat& pi_new)
@@ -48,4 +57,28 @@ float ExpectedValue(const vector<float>& arr)
 	for (k; k != p.end(); ++k)
 		M += k->first * k->second;
 	return M;
+}
+
+float Variance(const vector<float>& arr,const float M)
+{
+	// D[X] = M[(X-M[X])^2]
+	map<float,int> p;
+	int count(arr.size());
+	//Нахождение вероятностей выпадения чисел
+	for (int i = 0; i < count; ++i)
+		p[pow((arr[i]-M),2)]++;					
+	map<float,int>::iterator k = p.begin();
+	float D(0);
+	for (k; k != p.end(); ++k)
+		D += k->first * k->second;
+	return D;
+}
+
+float StandardDeviation(const vector<float>& arr,float X_am)
+{
+	float sigma(0);
+	int count(arr.size());
+	for (int i = 0; i < count; ++i)
+		sigma += pow((arr[i]-X_am),2);
+	return pow(sigma/count,0.5);
 }

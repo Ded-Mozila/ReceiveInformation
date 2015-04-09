@@ -226,7 +226,7 @@ void test_4_2()//Проверка Алгорчитма
 					pi_new = HInterpolation(pi,p.setVector());
 					GidroFile gif(pi_new);
 					// Статистика
-					statisticsFun(pi,pi_new,nameMKD);
+					statisticsFun(pi,pi_new,nameMKD, ilev);
 					pi = pi_new;
 					string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
 					map.printInFile(strName,gif);
