@@ -1,6 +1,7 @@
 #include "DataImage.h"
 #include "settings.h"
 #include "stdlib.h"
+#include "statistics.h"
 
 
 
@@ -185,7 +186,7 @@ void test_4_1(int iterm)//рабочий тест
 	}
 	
 }
-void test_4_2()//Проверка Алгоритма
+void test_4_2()//Проверка Алгорчитма
 {
 	Settings map("settings.txt");
 	vector<string> lev;	// Список уровней
@@ -216,6 +217,7 @@ void test_4_2()//Проверка Алгоритма
 				cout << "Good Open file: ps_" << h*3 << endl;
 				newIMG.MapPmsl();
 				VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
+				VVfloat pi_new(newIMG.getPresure());// среднее давление на урове моря
 				for (int ilev = 0; ilev < 30; ++ilev)
 				{
 					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
@@ -224,7 +226,7 @@ void test_4_2()//Проверка Алгоритма
 					pi_new = HInterpolation(pi,p.setVector());
 					GidroFile gif(pi_new);
 					// Статистика
-					statisticsFun(pi,pi_new);
+					statisticsFun(pi,pi_new,nameMKD);
 					pi = pi_new;
 					string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
 					map.printInFile(strName,gif);
