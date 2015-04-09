@@ -218,17 +218,21 @@ void test_4_2()//Проверка Алгорчитма
 				newIMG.MapPmsl();
 				VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
 				VVfloat pi_new(newIMG.getPresure());// среднее давление на урове моря
+				// string strNamePs(GenNameFile(GenNameFile(nameMKD,"presure"),".txt"));
+				// GidroFile gifPs(pi);
+				// map.printInFile(strNamePs,gifPs);
 				for (int ilev = 0; ilev < 30; ++ilev)
 				{
 					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
 					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 					GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
 					pi_new = HInterpolation(pi,p.setVector());
-					GidroFile gif(pi_new);
 					// Статистика
-					statisticsFun(pi,pi_new,nameMKD, ilev);
+					string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics"),GetStringInt(h*3)),".txt"));
+					statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
 					pi = pi_new;
 					string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
+					GidroFile gif(pi_new);
 					map.printInFile(strName,gif);
 				}
 			}

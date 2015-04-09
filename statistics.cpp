@@ -5,15 +5,40 @@ void statisticsFun(const VVfloat& pi,const VVfloat& pi_new,const string& nameFil
 	vector<float> defferences(TableDifferences(pi,pi_new));
 	sort(defferences.begin(),defferences.end());
 	ofstream fileStatistics(nameFile.c_str(),std::ofstream::out | std::ofstream::app);
-	float M(ExpectedValue(defferences));
-	float X_am(AM(defferences));
-	fileStatistics << "Interpolation " << i \
-	<< "\nArithmetic mean 	:" << X_am \
-	<< "\nRoot mean square 	:" << RMS(defferences) \
-	<< "\nExpected value 	:" 	<< M \
-	<< "\nVariance			:" << Variance(defferences,M) \
-	<< "\nStandard Deviation:" << StandardDeviation(defferences,X_am) << '\n';
-	fileStatistics.close();
+	if(fileStatistics){
+		cout << "Opening file" << nameFile <<endl;
+		if (i == 1)
+		{
+			fileStatistics \
+		<< "_____________________Statistics_____________________\n"\
+		<< " № |"
+		<< "Arithmetic mean     |"\
+		<< "Root mean square    |"\
+		<< "Expected value      |"\
+		<< "Variance            |"\
+		<< "Standard Deviation  |\n"\
+		<< "---+"
+		<< "--------------------+"\
+		<< "--------------------+"\
+		<< "--------------------+"\
+		<< "--------------------+"\
+		<< "--------------------|\n";
+		}
+		float M(ExpectedValue(defferences));
+		float X_am(AM(defferences));
+		fileStatistics \
+		<< setfill(' ')<< setw(3) /*<< setprecision(9)*/<< i  <<"|"\
+		<< setfill(' ')<< setw(20) /*<< setprecision(9)*/<< X_am << "|"\
+		<< setfill(' ')<< setw(20) /*<< setprecision(9)*/<< RMS(defferences) << "|"\
+		<< setfill(' ')<< setw(20) /*<< setprecision(9)*/<< M << "|"\
+		<< setfill(' ')<< setw(20) /*<< setprecision(9)*/<< Variance(defferences,M) << "|"\
+		<< setfill(' ')<< setw(20) /*<< setprecision(9)*/<< StandardDeviation(defferences,X_am) << "|\n";
+		fileStatistics.close();	
+	}
+	else 
+	{
+		cout << " Not opening file" << nameFile <<endl;
+	}
 }
 
 vector<float> TableDifferences(const VVfloat& pi ,const VVfloat& pi_new)
@@ -55,7 +80,7 @@ float ExpectedValue(const vector<float>& arr)
 	map<float,int>::iterator k = p.begin();
 	float M(0);
 	for (k; k != p.end(); ++k)
-		M += k->first * k->second;
+		M += k->first * k->second/count;
 	return M;
 }
 
