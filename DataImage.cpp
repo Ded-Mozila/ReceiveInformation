@@ -78,3 +78,16 @@ VVfloat DataImage::getPresure()
 {
 	return presureS;
 }
+
+void DataImage::addGeopotential(VVfloat& new_geo)				// получение нового геопотенциалла
+{
+	geopotential = new_geo;
+}
+VVfloat DataImage::getGeopotential()
+{
+	return geopotential;
+}
+VVfloat DataImage::getHgt()
+{
+	return hgt.setVector();
+}

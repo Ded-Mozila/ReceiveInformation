@@ -211,10 +211,29 @@ void test_4_2()//Проверка Алгорчитма
 		for (int h = 0; h < ps_size; ++h)
 		{
 			vector<string> nlev = dir.findFileHour("P_",lev[h]);
+			vector<string> hlev = dir.findFileHour("H_",lev[h]);
+
 			if(!nlev.empty())
 			{
 				DataImage newIMG(map.getName(q),h*3);
 				cout << "Good Open file: ps_" << h*3 << endl;
+				////////////////////////////////////////////////
+				VVfloat geo(newIMG.getHgt());
+				VVfloat geo_new(newIMG.getHgt());
+				for (int ilev = 0; ilev < 30; ++ilev)
+				{
+					cout << hlev[ilev];
+					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
+					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+					GidroFile H(GenNameFile(map.getName(q),hlev[ilev]));
+					geo_new = HInterpolation(geo,H.setVector());
+					// Статистика
+					string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics_geo_"),GetStringInt(h*3)),".txt"));
+					statisticsFun(geo,geo_new,nameFileStatistics, ilev+1);
+					geo = geo_new;
+				}
+				newIMG.addGeopotential(geo);
+				///////////////////////////////////////
 				newIMG.MapPmsl();
 				VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
 				VVfloat pi_new(newIMG.getPresure());// среднее давление на урове моря

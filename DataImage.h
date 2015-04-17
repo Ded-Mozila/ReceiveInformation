@@ -8,7 +8,7 @@ private:
 	GidroFile ps;							// Давление на уровне земли
 	GidroFile ts;							// Температура на уроввне земли
 	VVfloat presureS;						// Давление на уровне моря!
-	vector<VVfloat> gif;					// Все изменения за 20 итераций
+	vector<VVfloat> gif;					// Все изменения за все cитераций
 	GidroFile hgt;							// Высота
 	GidroFile lat;							// Широта
 	GidroFile lon;							// Долгота
@@ -33,6 +33,9 @@ public:
 	void HorizontalInterpolation_gif();			//-> settings.cpp	Горизонтальная интерполяция
 	void HorizontalInterpolation_gif(VVfloat);			//-> settings.cpp	Горизонтальная интерполяция
 	void addHgt(GidroFile&);
+	VVfloat getHgt();
+	void addGeopotential(VVfloat&);				// получение нового геопотенциалла
+	VVfloat getGeopotential();					// вывод данных о геопотонциалле
 	VVfloat getPresure();						// Вывод из классса коннечных данных
 };
 #endif

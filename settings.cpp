@@ -96,7 +96,7 @@ void DataImage::MapPmsl()
 		vector<float> newString;
 		for (int j = 0; j < ps.sizeMap(i); ++j)
 		{
-			newString.push_back(Pmsl(ps.At(i,j),ts.At(i,j),hgt.At(i,j)));
+			newString.push_back(Pmsl(ps.At(i,j),ts.At(i,j),geopotential[i][j]));
 		}
 		presureS.push_back(newString);
 		//newString.clear();
