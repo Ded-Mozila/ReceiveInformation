@@ -219,19 +219,19 @@ void test_4_2()//Проверка Алгорчитма
 				cout << "Good Open file: ps_" << h*3 << endl;
 				////////////////////////////////////////////////
 				VVfloat geo(newIMG.getHgt());
-				VVfloat geo_new(newIMG.getHgt());
-				for (int ilev = 0; ilev < 30; ++ilev)
-				{
-					cout << hlev[ilev];
-					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
-					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-					GidroFile H(GenNameFile(map.getName(q),hlev[ilev]));
-					geo_new = HInterpolation(geo,H.setVector());
-					// Статистика
-					string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics_geo_"),GetStringInt(h*3)),".txt"));
-					statisticsFun(geo,geo_new,nameFileStatistics, ilev+1);
-					geo = geo_new;
-				}
+				// VVfloat geo_new(newIMG.getHgt());
+				// for (int ilev = 0; ilev < 30; ++ilev)
+				// {
+				// 	cout << hlev[ilev];
+				// 	string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
+				// 	mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+				// 	GidroFile H(GenNameFile(map.getName(q),hlev[ilev]));
+				// 	geo_new = HInterpolation(geo,H.setVector());
+				// 	// Статистика
+				// 	string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics_geo_"),GetStringInt(h*3)),".txt"));
+				// 	statisticsFun(geo,geo_new,nameFileStatistics, ilev+1);
+				// 	geo = geo_new;
+				// }
 				newIMG.addGeopotential(geo);
 				///////////////////////////////////////
 				newIMG.MapPmsl();
