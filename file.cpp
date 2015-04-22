@@ -48,6 +48,108 @@ bool mkdirp(const char* path, mode_t mode) //Создание дерева ди�
 	}
 	return true;
 }
+VVfloat Smth9(VVfloat arr)
+{	
+	cout << "Smth9"<< endl;
+	VVfloat smth9;
+	cout << arr.size() << endl << arr[0].size()<< endl;
+	for (int i = 0; i < arr.size(); ++i)
+	{
+		if (i%100 ==0) cout << i << endl;
+		vector<float> new_line;
+		for (int j = 0; j < arr[1].size(); ++j)
+		{
+
+			// cout << j;
+			new_line.push_back(PointIner(i,j,arr,arr.size(),arr[0].size()));
+		}
+		// cout << endl;
+		smth9.push_back(new_line);
+	}
+	return smth9;
+}
+float PointIner(int row, int column, VVfloat arr,int N,int n)
+{
+	//  Проверка на вхождение в область
+	float sumMass = 0,sumPoint = 0;
+	if(0 <= (row-1)/* && (row) <= arr[row].size()*/) 		// строка сверху
+	{
+		// cout<< "row-1";
+		// Точка column-1 row-1
+		if(0 <= column-1  && (column-1) <= n-1)
+		{
+			// cout<< "-column-1";
+			sumPoint += arr.at(row-1).at(column-1) * 0.3;
+			sumMass +=0.3;
+		}
+		//Точка column row-1
+		if(0 <= column  && (column) < n)
+		{
+			// cout<< "-column";
+			sumPoint += arr.at(row-1).at(column) * 0.5;
+			sumMass +=0.5;
+		}
+		// //Точка column-1 row-1
+		if(0 <= column+1  && (column+1) <= n-1)
+		{
+			// cout<< "-column+1 ";
+			sumPoint += arr.at(row-1).at(column+1) * 0.3;
+			sumMass +=0.3;
+		}
+	}
+	if(0 <= (row) /*&& (row) <= arr[row].size()*/) 		// строка по центру
+	{
+		//Точка column-1 row
+		// cout<< "row";
+		if(0 <= column-1  && (column) <= n-1)
+		{
+			// cout<< "-column-1";
+			sumPoint += arr.at(row).at(column-1) * 0.5;
+			sumMass +=0.5;
+		}
+		//Точка column-1 row
+		if(0 <= column  && (column) <= n-1)
+		{
+			// cout<< "-column ";
+			sumPoint += arr.at(row).at(column) * 1.0;
+			sumMass +=1;
+		}
+		//Точка column-1 row
+		if(0 <= column+1  && (column+1) <= n-1)
+		{
+			// cout<< "-column+1 ";
+			sumPoint += arr.at(row).at(column+1)* 0.5;
+			sumMass +=0.5;
+		}
+	}
+	if(/*(0 <= (row+1) &&*/ (row+1) < N)	// строка снизу
+	{
+		//Точка column-1 row
+		// cout<< "row+1";
+		if(0 <= column-1  && (column-1) <= n-1)
+		{
+			// cout<< "-column-1";
+			sumPoint += arr.at(row+1).at(column-1) * 0.3;
+			sumMass +=0.3;
+		}
+		//Точка column-1 row
+		if(0 <= column  && (column) <= n-1)
+		{
+			// cout<< "-column ";
+			sumPoint += arr.at(row+1).at(column) * 0.5;
+			sumMass +=0.5;
+		}
+		//Точка column-1 row
+		if(0 <= column+1  && (column+1) <= n-1)
+		{
+			// cout<< "-column+1 ";
+			sumPoint += arr.at(row+1).at(column+1)* 0.3;
+			sumMass +=0.3;
+		}
+	}
+	// cout << arr[row][column] << "  " << sumPoint/sumMass <<endl;
+	return  sumPoint/sumMass;
+}
 File::File(string Name):name(Name)
 {
 	open_file.open(name.c_str(),ios_base::in);	

@@ -26,4 +26,7 @@ string GenNameFile(const string,string);// file.cpp ->
 string GetStringInt(int);// file.cpp ->
 bool mkdirp(const char* path, mode_t mode);// file.cpp ->
 VVfloat HInterpolation(VVfloat,VVfloat);
+VVfloat Smth9(VVfloat);// file.cpp ->
+float PointIner(int,int,VVfloat,int,int);// file.cpp ->
+
 #endif

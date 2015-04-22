@@ -240,7 +240,8 @@ void test_4_2()//Проверка Алгорчитма
 				// string strNamePs(GenNameFile(GenNameFile(nameMKD,"presure"),".txt"));
 				// GidroFile gifPs(pi);
 				// map.printInFile(strNamePs,gifPs);
-				for (int ilev = 0; ilev < 30; ++ilev)
+				int endIter = 23;
+				for (int ilev = 0; ilev < endIter; ++ilev)
 				{
 					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
 					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -253,7 +254,16 @@ void test_4_2()//Проверка Алгорчитма
 					string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
 					GidroFile gif(pi_new);
 					map.printInFile(strName,gif);
+					if(ilev+1 == endIter )
+					{
+						// Сгдаживание
+						string strNameSmth9(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),"_smth.txt"));
+						VVfloat smth9(Smth9(pi_new));
+						GidroFile gifSmth9(smth9);
+						map.printInFile(strNameSmth9,gifSmth9);
+					}
 				}
+
 			}
 		}	
 	}
@@ -265,6 +275,16 @@ int main(int argc, char const *argv[])
 	//test_2();
 	//test_3();
 //	test_4_1(atoi(argv[1]));
-	test_4_2();
+	test_4_2();/*-------------*/
+	// VVfloat V;
+	// for (int i = 0; i < 4; ++i)
+	// {
+	// 	vector<float> k;
+	// 	k.push_back(0.5);
+	// 	k.push_back(1);
+	// 	k.push_back(0.5);
+	// 	V.push_back(k);
+	// }
+	// VVfloat VV = Smth9(V);
 	return 0;
 }

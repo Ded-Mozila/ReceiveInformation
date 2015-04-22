@@ -6,7 +6,7 @@ void statisticsFun(const VVfloat& pi,const VVfloat& pi_new,const string& nameFil
 	sort(defferences.begin(),defferences.end());
 	ofstream fileStatistics(nameFile.c_str(),std::ofstream::out | std::ofstream::app);
 	if(fileStatistics){
-		cout << "Opening file" << nameFile <<endl;
+		cout << "Opening file" << i <<endl;
 		if (i == 1)
 		{
 			fileStatistics \
