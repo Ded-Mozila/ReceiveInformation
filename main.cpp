@@ -243,25 +243,38 @@ void test_4_2()//Проверка Алгорчитма
 				int endIter = 23;
 				for (int ilev = 0; ilev < endIter; ++ilev)
 				{
-					string nameMKD(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
+					//string nameMKD(GenNameFile(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"    "),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
+					string nameMKD(MakeString(5,map.getNameDir().c_str(),"/",map.getNameMakeDir(q).c_str(),GetStringInt(ilev).c_str(),"/"));
+					cout << nameMKD<< endl;
 					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 					GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
 					pi_new = HInterpolation(pi,p.setVector());
 					// Статистика
-					string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics"),GetStringInt(h*3)),".txt"));
+					// string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics"),GetStringInt(h*3)),".txt"));
+					string nameFileStatistics(MakeString(6,map.getNameDir().c_str(),"/", map.getNameMakeDir(q).c_str(),"statistics",GetStringInt(h*3).c_str(),".txt"));
+					cout << nameFileStatistics<< endl;
 					statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
 					pi = pi_new;
-					string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
+					// string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
+					string strName(MakeString(4,nameMKD.c_str(),"presure_",GetStringInt(h*3).c_str(),".txt"));
 					GidroFile gif(pi_new);
 					map.printInFile(strName,gif);
+						// Сгдаживание
 					if(ilev+1 == endIter )
 					{
-						// Сгдаживание
-						string strNameSmth9(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),"_smth.txt"));
-						VVfloat smth9(Smth9(pi_new));
+						VVfloat smth9(pi);
+						for (int i = 0; i < 6; ++i)
+						{
+							smth9 = Smth9(pi_new);
+							statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
+							pi_new = smth9;
+						mkdirp(MakeString(3,nameMKD.c_str(),"/smth9/",GetStringInt(i).c_str()).c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+						string strNameSmth9(MakeString(6,nameMKD.c_str(),"/smth9/",GetStringInt(i).c_str(),"/presure_",GetStringInt(h*3).c_str(),".txt"));
 						GidroFile gifSmth9(smth9);
 						map.printInFile(strNameSmth9,gifSmth9);
+						}
 					}
+						// string strNameSmth9(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),"_smth.txt"));
 				}
 
 			}
@@ -276,15 +289,5 @@ int main(int argc, char const *argv[])
 	//test_3();
 //	test_4_1(atoi(argv[1]));
 	test_4_2();/*-------------*/
-	// VVfloat V;
-	// for (int i = 0; i < 4; ++i)
-	// {
-	// 	vector<float> k;
-	// 	k.push_back(0.5);
-	// 	k.push_back(1);
-	// 	k.push_back(0.5);
-	// 	V.push_back(k);
-	// }
-	// VVfloat VV = Smth9(V);
 	return 0;
 }

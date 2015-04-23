@@ -17,6 +17,7 @@
 #include <cmath>
 #include <cstdlib> // itoa()
 #include <stdio.h> // freeopen()
+#include <stdarg.h>//(...)
 //#include "namespaceData.h"
 using namespace std;
 //using namespace Data_Lvl;
@@ -28,5 +29,5 @@ bool mkdirp(const char* path, mode_t mode);// file.cpp ->
 VVfloat HInterpolation(VVfloat,VVfloat);
 VVfloat Smth9(VVfloat);// file.cpp ->
 float PointIner(int,int,VVfloat,int,int);// file.cpp ->
-
+string MakeString(int,...);// file.cpp ->
 #endif

@@ -18,7 +18,20 @@ string GetStringInt(int i)// -> header.h
 	ss >> str;
 	return str;
 }
-
+string MakeString(int n,...)
+{
+	stringstream ss;
+	va_list ap;
+	va_start(ap,n);
+	for (int i = 0; i < n; ++i)
+	{
+		ss << va_arg(ap,char*);	
+	}
+	string sss;
+	ss >> sss;
+	va_end(ap);
+	return sss;
+}
 bool mkdirp(const char* path, mode_t mode) //Создание дерева директории
 {
 	// const cast for hack
