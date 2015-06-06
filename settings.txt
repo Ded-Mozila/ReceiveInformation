@@ -1,6 +1,6 @@
-/home/aleks/Aleksander/study/Credential/Project/ReceiveInformation_1/FILE_Test
-2
+/home/aleks/Aleksander/study/Credential/Project/ReceiveInformation_1/FILE_Test_3
+1
+/home/aleks/Aleksander/study/Credential/sasha_diplom_data/2014.08.09/
 /home/aleks/Aleksander/study/Credential/sasha_diplom_data/2013.12.11/
 /home/aleks/Aleksander/study/Credential/sasha_diplom_data/2014.04.11/
-/home/aleks/Aleksander/study/Credential/sasha_diplom_data/2014.08.09/
 /home/aleks/Aleksander/study/Credential/sasha_diplom_data/2014.09.23/

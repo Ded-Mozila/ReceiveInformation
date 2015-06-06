@@ -236,46 +236,69 @@ void test_4_2()//Проверка Алгорчитма
 				///////////////////////////////////////
 				newIMG.MapPmsl();
 				VVfloat pi(newIMG.getPresure());// среднее давление на урове моря
+				//Сохранение Данных по барометрической формуле
+				string dirNameP0(MakeString(5,map.getNameDir().c_str(),"/",map.getNameMakeDir(q).c_str(),"P0","/"));//Адрес дериктории с Барометрической формулой
+				mkdirp(dirNameP0.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+				string strPresure(MakeString(4,dirNameP0.c_str(),"presure_",GetStringInt(h*3).c_str(),".txt"));		// Имя файл P0
+				// GidroFile gifPres(pi);																				// Запись в файл P0
+				// map.printInFile(strPresure,gifPres);
+				VVfloat P0_smth9(pi);
 				VVfloat pi_new(newIMG.getPresure());// среднее давление на урове моря
+				//создание папки сос татистикой для сгглаженного поля давления 
+				//Сглаживания Поле Барометрической формулы
+				VVfloat smth9(pi);
+				string dirNameP0_smth9_st(MakeString(5,map.getNameDir().c_str(),"/",map.getNameMakeDir(q).c_str(),"P0_smth9_ststic","/"));
+				mkdirp(dirNameP0_smth9_st.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+				for (int i = 0; i < 16; ++i)
+				{
+					smth9 = Smth9(pi_new);
+					statisticsFun(pi_new,smth9,MakeString(4,dirNameP0_smth9_st.c_str(),"statistics",GetStringInt(h*3).c_str(),".txt"), i+1);
+					pi_new = smth9;
+					string dirNameP0_smth9(MakeString(5,map.getNameDir().c_str(),"/",map.getNameMakeDir(q).c_str(),"P0_smth9","/"));//Адрес дериктории с Барометрической формулой
+					mkdirp(MakeString(2,dirNameP0_smth9.c_str(),GetStringInt(i).c_str()).c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+					string strNameSmth9(MakeString(5,dirNameP0_smth9.c_str(),GetStringInt(i).c_str(),"/presure_",GetStringInt(h*3).c_str(),".txt"));
+					GidroFile gifSmth9(smth9);
+					map.printInFile(strNameSmth9,gifSmth9);
+				}
 				// string strNamePs(GenNameFile(GenNameFile(nameMKD,"presure"),".txt"));
 				// GidroFile gifPs(pi);
 				// map.printInFile(strNamePs,gifPs);
-				int endIter = 23;
-				for (int ilev = 0; ilev < endIter; ++ilev)
-				{
-					//string nameMKD(GenNameFile(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"    "),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
-					string nameMKD(MakeString(5,map.getNameDir().c_str(),"/",map.getNameMakeDir(q).c_str(),GetStringInt(ilev).c_str(),"/"));
-					cout << nameMKD<< endl;
-					mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-					GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
-					pi_new = HInterpolation(pi,p.setVector());
-					// Статистика
-					// string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics"),GetStringInt(h*3)),".txt"));
-					string nameFileStatistics(MakeString(6,map.getNameDir().c_str(),"/", map.getNameMakeDir(q).c_str(),"statistics",GetStringInt(h*3).c_str(),".txt"));
-					cout << nameFileStatistics<< endl;
-					statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
-					pi = pi_new;
-					// string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
-					string strName(MakeString(4,nameMKD.c_str(),"presure_",GetStringInt(h*3).c_str(),".txt"));
-					GidroFile gif(pi_new);
-					map.printInFile(strName,gif);
-						// Сгдаживание
-					if(ilev+1 == endIter )
-					{
-						VVfloat smth9(pi);
-						for (int i = 0; i < 6; ++i)
-						{
-							smth9 = Smth9(pi_new);
-							statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
-							pi_new = smth9;
-						mkdirp(MakeString(3,nameMKD.c_str(),"/smth9/",GetStringInt(i).c_str()).c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-						string strNameSmth9(MakeString(6,nameMKD.c_str(),"/smth9/",GetStringInt(i).c_str(),"/presure_",GetStringInt(h*3).c_str(),".txt"));
-						GidroFile gifSmth9(smth9);
-						map.printInFile(strNameSmth9,gifSmth9);
-						}
-					}
-						// string strNameSmth9(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),"_smth.txt"));
-				}
+				// int endIter = 23;
+				// for (int ilev = 0; ilev < endIter; ++ilev)
+				// {
+				// 	//string nameMKD(GenNameFile(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"    "),GenNameFile("/",GetStringInt(ilev))),"/"),map.getNameMakeDir(q)));
+				// 	string nameMKD(MakeString(5,map.getNameDir().c_str(),"/",map.getNameMakeDir(q).c_str(),GetStringInt(ilev).c_str(),"/"));
+				// 	cout << nameMKD<< endl;
+				// 	mkdirp(nameMKD.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+				// 	GidroFile p(GenNameFile(map.getName(q),nlev[ilev]));
+				// 	pi_new = HInterpolation(pi,p.setVector());
+				// 	// Статистика
+				// 	// string nameFileStatistics(GenNameFile(GenNameFile(GenNameFile(map.getNameDir(),"/statistics"),GetStringInt(h*3)),".txt"));
+				// 	string nameFileStatistics(MakeString(6,map.getNameDir().c_str(),"/", map.getNameMakeDir(q).c_str(),"statistics",GetStringInt(h*3).c_str(),".txt"));
+				// 	cout << nameFileStatistics<< endl;
+				// 	statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
+				// 	pi = pi_new;
+				// 	// string strName(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),".txt"));
+				// 	string strName(MakeString(4,nameMKD.c_str(),"presure_",GetStringInt(h*3).c_str(),".txt"));
+				// 	GidroFile gif(pi_new);
+				// 	map.printInFile(strName,gif);
+				// 		// Сгдаживание
+				// 	if(ilev+1 == endIter )
+				// 	{
+				// 		VVfloat smth9(pi);
+				// 		for (int i = 0; i < 6; ++i)
+				// 		{
+				// 			smth9 = Smth9(pi_new);
+				// 			statisticsFun(pi,pi_new,nameFileStatistics, ilev+1);
+				// 			pi_new = smth9;
+				// 			mkdirp(MakeString(3,nameMKD.c_str(),"/smth9/",GetStringInt(i).c_str()).c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+				// 			string strNameSmth9(MakeString(6,nameMKD.c_str(),"/smth9/",GetStringInt(i).c_str(),"/presure_",GetStringInt(h*3).c_str(),".txt"));
+				// 			GidroFile gifSmth9(smth9);
+				// 			map.printInFile(strNameSmth9,gifSmth9);
+				// 		}
+				// 	}
+				// 		// string strNameSmth9(GenNameFile(GenNameFile(GenNameFile(nameMKD,"presure_"),GetStringInt(h*3)),"_smth.txt"));
+				// }
 
 			}
 		}	
